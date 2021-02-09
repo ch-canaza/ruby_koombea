@@ -1,8 +1,7 @@
 # ruby_koombea
 
 
-## in this repo is going to be saved everything related with the ruby process
-at koombea
+### in this repo is going to be saved everything related with the ruby process at koombea  
 
 **1. tutorial ruby**  
 
