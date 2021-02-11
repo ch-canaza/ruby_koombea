@@ -115,7 +115,7 @@ example 2:
 end  
 
 
-* **hases** use **=>** to asign values to an index in a hash  
+* **hashes** use **=>** to asign values to an index in a hash  
 * * We can add to a hash two ways: if we created it using literal notation, we can simply add a new key-value pair directly between the curly braces. If we used Hash.new, we can add to the hash using bracket notation:  
 
 * * Hash.new(0) le dá **0** como valor por defecto a los values del hash  
@@ -131,11 +131,12 @@ end
 
 * **combined comparisson operator** **<=>** returns 0 if the first operand (item to be compared) equals the second, 1 if the first operand is greater than the second, and -1 if the first operand is less than the second.  
 
-example: 
+example: **block**
 
 
 > * To sort our books in **ascending** order, in-place  
     books.sort! { |firstBook, secondBook| firstBook <=> secondBook }  
+
 
 > * Sort your books in **descending** order, in-place below  
     print books.sort! { |firstbook, secondbook| secondbook <=> firstbook }  
@@ -335,10 +336,198 @@ nums = strings.map(&:to_i)
 * easy to use
 * case sensitive
 
+## ruby lambda  
+Like procs, lambdas are objects. The similarities don’t stop there: with the exception of a bit of syntax and a few behavioral quirks, lambdas are identical to procs.  
 
 
+lambda { |param| block }
 
 
+Nota:  
+
+lambda checks the number of arguments passed to it, while a proc does not. This means that a lambda will throw an error   
+
+proc will ignore unexpected arguments and assign nil to any that are missing.  
+
+when a lambda returns, it passes control back to the calling method;  
+
+ when a proc returns, it does so immediately, without going back to the calling method.  
+
+example:  
+
+def batman_ironman_proc  
+  victor = Proc.new { return "Batman will win!" }  
+  victor.call  
+  "Iron Man will win!"  
+end  
+
+puts batman_ironman_proc 
+
+def batman_ironman_lambda  
+  victor = lambda { return "Batman will win!" }  
+  victor.call  
+  "Iron Man will win!"  
+end  
+
+puts batman_ironman_lambda  
+
+**proc** termina la ejecucion con su retorno  
+**lambda** regresa el control a la funcion y es ella quien termina la eecucion  
+
+### sumary block lambda procs
+
+A block is just a bit of code between do..end or {}. It’s not an object on its own, but it can be passed to methods like .each or .select.  
+A proc is a saved block we can use over and over.  
+A lambda is just like a proc, only it cares about the number of arguments it gets and it returns to its calling method rather than returning immediately.  
+
+
+## classes  
+
+class Language  
+  @@class_var
+  def initialize(name, creator)  
+    @instance_variable
+    @name = name  
+    @creator = creator  
+  end  
+
+ **@var** represents variables of instance  
+
+ **$var** global variables  
+ 
+ **@@var** class variables  
+
+**super**  
+
+### cuando llamas super, desde un metodo esto le dice a rubi que busque en la clase padre un metodo con el mismo nombre y lo ejecute
+
+sintax:  
+
+class DerivedClass < Base  
+  def some_method  
+    super(optional args)  
+      # Some stuff  
+    end  
+  end  
+end  
+
+
+> error por intentar multiple herencia:  
+
+**superclass mismatch for class my_class**
+
+
+**class methods**    
+
+class Machine  
+  **def Machine.hello**  
+    puts "Hello from the machine!"  
+  end  
+end  
+
+
+## public and private methods   
+
+(That name= might look funny, but you’re allowed to put an = sign in a method name. That’s just a Ruby convention saying, “hey, this method sets a value!”)
+
+getter:  
+
+def name  
+  @name  
+end  
+ 
+setter:  
+
+def name=(value)  
+  @name = value  
+end  
+
+accesor:  We can use attr_accessor to make a variable readable and writeable in one fell swoop.  
+
+attr_accessor(:name, :job)  
+
+
+## modules  
+
+module ModuleName  (Camelcase)
+  #Bits 'n pieces  
+end  
+
+>It doesn’t make sense to include variables in modules, since variables (by definition) change (or vary).   
+
+> Constants, however, are supposed to always stay the same, so including helpful constants in modules is a great idea.  
+
+>modules are stored in **namespaces**
+
+**::** scope resolution operator (it tells Ruby where you’re looking for a specific bit of code)  
+
+example:  
+
+math::PI  
+circle::PI  
+
+**require** kind of import  
+
+**include** Any class that includes a certain module can use those module’s methods!  
+se usa para incluir modulos y sus funciones dentro de clases
+
+>When a module is used to mix additional behavior and information into a class, it’s called a mixin. Mixins allow us to customize a class without having to rewrite code!  
+
+>this way we can imitate Multiple inheritance!
+
+>include mixes a module’s methods in at the instance level (allowing instances of a particular class to use the methods  
+
+include permite a instancias mezclarse con modulos  
+
+module MartialArts  
+  def swordsman   
+    puts "I'm a swordsman"  
+  end  
+end  
+class Ninja  
+include MartialArts  
+  def initialize(clan)  
+    @clan = clan  
+  end  
+end  
+
+**extend**
+
+>the extend keyword mixes a module’s methods at the class level. This means that class itself can use the methods, as opposed to instances of the class.  
+
+extend permite a la clase mezclarse con los modulos
+
+module ThePresent  
+  def now
+    puts "It's #{Time.new.hour > 12 ? Time.new.hour - 12 : Time.new.hour}:#{Time.  new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."  
+  end  
+end  
+
+class TheHereAnd  
+  extend ThePresent  
+end  
+ 
+TheHereAnd.now  
+
+## optional parameter  
+
+def func(a, b=1)  
+
+b is an optional parameter because i has a default value
+
+
+## sumary oop  
+
+example:  
+
+class Account  
+    attr_reader :name  
+    attr_reader :balance  
+    def initialize(name, balance=100)  
+    @name = name  
+    @balance = balance  
+  end  
+end  
 
 
 
