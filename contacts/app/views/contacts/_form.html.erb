@@ -1,0 +1,45 @@
+<%= form_with(model: contact) do |form| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+        <% contact.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group" >
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, class:"form-control form-control-lg" %>
+  </div>
+
+  <div class="field form-label">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, class:"form-control form-control-lg" %>
+  </div>
+
+ 
+  <div class="field form-label">
+    <h4> add media </h4>
+    <%= form.fields_for :links, Link.new do |media_attributes|%>
+      <!--%= render 'link_fields', f: media_attributes %-->
+    <% end %>
+    <br/>
+    <p><%= link_to_add_fields "add Links", form, :links %></p>
+
+  </div>
+
+    <div class="actions form-label">
+      <%= form.submit class:"btn btn-success"%>
+      
+
+    </div>
+
+ 
+<% end %>
+
+
+
