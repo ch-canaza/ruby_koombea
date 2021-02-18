@@ -13,10 +13,17 @@
 
   <p class="fs-4">
     <strong>Media:</strong>
+   <!--- cada bloque hace los mismo --> 
+
     <!--%= @links.map{|link| link.media} %-->
-    <% @links.each do |link| %>
-      <p><%= link.media %></p>
-    <% end %>
+   <!---------->
+    <!--% @links.each do |link| %-->
+      <!--p--><!--%= link.media %--><!--/p-->
+    <!--% end %-->
+   <!------------>   
+    <%= render partial: "links_show", collection: @links %>
+
+    
   </p>
 </div>
 

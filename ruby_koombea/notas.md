@@ -91,6 +91,12 @@ curly braces (**{}**) are generally interchangeable with the keywords **do** (to
 * break if (break)
 * next if (similar to continue)  
 
+## Array  
+### methods  
+* **%w** splits a string  
+* **x=_** asigna la ejecucion anterior a la variable x en este caso el resultado de %w
+
+
 * **array**  
 * **append** elements to an array **arr.push(element)** or **arr << element**(the shovel)  
 * agregar al **comienzo** **arr.unshift**  
