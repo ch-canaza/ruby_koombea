@@ -1,11 +1,11 @@
 class LinksController < ApplicationController
 
     def index
-        @links = Link.all
+        @links = Links.all
     end
 
     def new
-        @link = Link.new
+        @link = Links.new
     end
     
     def show
@@ -14,7 +14,7 @@ class LinksController < ApplicationController
     #private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
-      @link = Link.find(params[:id])
+      @link = Links.find(params[:id])
     end
     
 end
