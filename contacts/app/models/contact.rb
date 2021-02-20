@@ -1,4 +1,5 @@
 class Contact < ApplicationRecord
+    belongs_to :user
     before_save { self.first_name = first_name.downcase }
     before_save { self.last_name = last_name.downcase }
     has_many :links, dependent: :destroy
