@@ -25,6 +25,12 @@
 
     
   </p>
+
+<p class="fs-6">
+    contact listed by:
+    <%= @contact.user.name %>
+  </p>
+
 </div>
 
 <%= link_to 'Edit', edit_contact_path(@contact), class:"btn btn-success" %> 

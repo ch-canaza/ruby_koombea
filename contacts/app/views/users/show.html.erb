@@ -3,6 +3,9 @@
 <div>
   <%= gravatar_for @user, size: 200 %>
 </div>
+
+<p class="card-text"><%= pluralize(@user.contact.count, "contact") %><p>
+
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
