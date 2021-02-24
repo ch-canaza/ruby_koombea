@@ -5,6 +5,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>Avatar<th>
       <th>First name</th>
       <th>Last name</th>
       <th>Media</th>
@@ -15,9 +16,12 @@
   <tbody>
     <% @contacts.each do |contact| %>
       <tr>
+         <% if contact.image.attached? %>
+          <td><%= image_tag contact.image, style: "width: 100px; display: block" %></td>
+        <% end %>
         <td><%= contact.first_name %></td>
         <td><%= contact.last_name %></td>
-        <!--td><%= contact.media %></td-->
+        
         <td><%= link_to 'Show', contact %></td>
         <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
         <!--td><%= link_to 'link list', edit_contact_path(contact) %></td-->

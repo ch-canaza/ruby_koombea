@@ -6,6 +6,10 @@ class ContactsController < ApplicationController
     @contacts = Contact.all
   end
 
+  def avatar
+    @contact
+  end
+
   # GET /contacts/1 or /contacts/1.json
   def show
     @links = @contact.links
@@ -69,7 +73,7 @@ class ContactsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def contact_params
       #params.require(:contact).permit(:first_name, :last_name, :media, links_attributes: [:id, :_destroy, :contacts_id, :first_name, :last_name])
-      params.require(:contact).permit(:first_name, :last_name, :media, links_attributes: Contact.attribute_names.map(&:to_sym).push(:_destoy))
+      params.require(:contact).permit(:first_name, :last_name, :media, :image, links_attributes: Contact.attribute_names.map(&:to_sym).push(:_destroy))
 
     end
 end

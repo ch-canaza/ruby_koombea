@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <div class="bg-light">
+  <!--%= link_to avatar_path do %-->
+   <%=link_to image_tag(@contact.image, style: "width: 400px;, height: 400 display: block"), @contact.image %>
+  <!--% end %-->
+
   <p class="fs-2">
     <strong>First name:</strong>
     <%= @contact.first_name %>
@@ -26,7 +30,7 @@
     
   </p>
 
-<p class="fs-6">
+  <p class="fs-6">
     contact listed by:
     <%= @contact.user.name %>
   </p>

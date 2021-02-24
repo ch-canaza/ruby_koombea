@@ -20,7 +20,17 @@
     <%= form.label :last_name %>
     <%= form.text_field :last_name, class:"form-control form-control-lg" %>
   </div>
+  
+  <div class="form-group">
+    <% if contact.image.attached? %>
+      <%= image_tag contact.image, style: "width: 100px;, height: 100px; display: block" %>
+      
+    <% end %>
 
+    <%= form.label :image %>
+    <%= form.file_field :image, class: "form-control" %>
+
+  </div>
  
   <div class="field form-label">
     <h4> add media </h4>
@@ -31,6 +41,7 @@
     <p><%= link_to_add_fields "add Links", form, :links %></p>
 
   </div>
+  
 
     <div class="actions form-label">
       <%= form.submit class:"btn btn-success"%>

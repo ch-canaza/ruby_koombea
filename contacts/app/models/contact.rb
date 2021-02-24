@@ -1,4 +1,5 @@
 class Contact < ApplicationRecord
+    
     belongs_to :user
     before_save { self.first_name = first_name.downcase }
     before_save { self.last_name = last_name.downcase }
@@ -8,4 +9,6 @@ class Contact < ApplicationRecord
                             uniqueness: {case_sensitive: false },
                             length: { maximum: 20 }
     validates :last_name, presence: true
+    has_one_attached :image 
+    
 end
