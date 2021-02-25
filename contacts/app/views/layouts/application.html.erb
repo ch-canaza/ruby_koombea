@@ -18,7 +18,12 @@
   </head>
   <body>
   <%= render 'home/header' %>
+  <br />
+  <p id="notice"><%= flash[:notice] %>
+  <p id="alert"><%= flash[:alert] %>
+
   <div class="container">
+
     <br/>
     <%= yield %>
   </div>

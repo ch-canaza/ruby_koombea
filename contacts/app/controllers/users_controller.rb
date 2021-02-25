@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_user, only: [:edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+
 
   # GET /users or /users.json
   def index
@@ -55,6 +58,7 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy
+    session[:user_id] = nil if @user == current_user
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
@@ -70,5 +74,12 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name, :email, :user_image, :password_digest)
+    end
+
+    def require_same_user
+      if current_user != @user && !current_user.admin?
+        flash[:alert] = "You can only edit your own account".inspect
+        redirect_to @user.inspect
+      end  
     end
 end

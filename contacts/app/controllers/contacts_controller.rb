@@ -1,5 +1,7 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: %i[ show edit update destroy ]
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   # GET /contacts or /contacts.json
   def index
@@ -75,4 +77,12 @@ class ContactsController < ApplicationController
       params.require(:contact).permit(:first_name, :last_name, :media, :image, links_attributes: Contact.attribute_names.map(&:to_sym).push(:_destroy))
 
     end
+
+    def require_same_user # verifica que la accion solo la ejecuta el dueño
+      if current_user != @contact.user && !current_user.admin?
+        flash[:alert] = "You can edit or delete your own article"
+        redirect_to @contact
+      end
+    end
+
 end

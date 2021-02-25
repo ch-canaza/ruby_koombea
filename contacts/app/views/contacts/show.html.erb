@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <div class="bg-light">
-  <!--%= link_to avatar_path do %-->
-   <%=link_to image_tag(@contact.image, size: 400 ), @contact.image %>
-  <!--% end %-->
+ 
+  <!--%=link_to image_tag(@contact.image.variant( resize: '400x400' ).processed), @contact.image %-->
+  <!--%= link_to image_tag(@contact.image.variant(:profile )) %-->
+  <%= link_to image_tag(@contact.profile), @contact.image %>
+  
 
   <p class="fs-2">
     <strong>First name:</strong>
@@ -37,5 +39,7 @@
 
 </div>
 
-<%= link_to 'Edit', edit_contact_path(@contact), class:"btn btn-success" %> 
+<% if logged_in? && (@contact.user == current_user || current_user_admin) %>
+  <%= link_to 'Edit', edit_contact_path(@contact), class:"btn btn-success" %>
+<% end %>
 <%= link_to 'Back', contacts_path, class:"btn btn-danger" %>

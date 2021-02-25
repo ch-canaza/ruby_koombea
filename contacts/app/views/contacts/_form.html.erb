@@ -23,8 +23,9 @@
   
   <div class="form-group">
     <% if contact.image.attached? %>
-      <!--%= image_tag contact.image.variant(resize_to_fit: [500, 300]) %-->
-      <%= image_tag contact.image, size: 100 %>
+      <%= image_tag contact.image.variant(resize: '100x100').processed %>
+      <!--%= image_tag contact.image.variant(:thumb) %-->
+      <!--%= image_tag contact.image, size: 100 %-->
       <!--%= image_tag contact.thumbnail.image %-->
       
     <% end %>
@@ -36,6 +37,7 @@
  
   <div class="field form-label">
     <h4> add media </h4>
+    
     <%= form.fields_for :links, Link.new do |media_attributes|%>
       <!--%= render 'link_fields', f: media_attributes %-->
     <% end %>

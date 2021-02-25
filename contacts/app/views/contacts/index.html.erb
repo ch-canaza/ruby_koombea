@@ -17,17 +17,21 @@
       <tr>
         <td><% if contact.image.attached? %>
           <%= image_tag contact.image, size: 100 %>
+          <!--%= image_tag(contact.thumb) %-->
+
           <% else %>
-            <p><%= contact.last_name %></p>
+            <p><%= image_tag("/unknown.png") %></p>
         <% end %></td>
         
         <td><%= contact.first_name %></td>
         <td><%= contact.last_name %></td>
         
         <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <!--td><%= link_to 'link list', edit_contact_path(contact) %></td-->
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if logged_in? && (contact.user == current_user || current_user.admin?) %>
+          <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+          <!--td><%= link_to 'link list', edit_contact_path(contact) %></td-->
+          <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

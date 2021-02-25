@@ -10,6 +10,15 @@ class Contact < ApplicationRecord
                             length: { maximum: 20 }
     validates :last_name, presence: true 
     has_one_attached :image
+    
+     def thumb 
+        image.variant(resize: '100x100!').processed
+     end
+
+     def profile
+      image.variant(resize: '400x400!').processed
+     end
+        
    
     validate :correct_image_type
     
