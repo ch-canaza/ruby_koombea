@@ -8,7 +8,15 @@ class Contact < ApplicationRecord
     validates :first_name, presence: true,
                             uniqueness: {case_sensitive: false },
                             length: { maximum: 20 }
-    validates :last_name, presence: true
-    has_one_attached :image 
+    validates :last_name, presence: true 
+    has_one_attached :image
+   
+    validate :correct_image_type
     
+    private
+    def correct_image_type
+        if image.attached? && !image.content_type.in?(%W(image/jpg image/png))
+            errors.add(:image, 'must be JPG or PNG.')
+        end
+    end
 end

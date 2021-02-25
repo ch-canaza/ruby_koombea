@@ -6,13 +6,12 @@ class ContactsController < ApplicationController
     @contacts = Contact.all
   end
 
-  def avatar
-    @contact
-  end
+  
 
   # GET /contacts/1 or /contacts/1.json
   def show
     @links = @contact.links
+  
   end
 
   # GET /contacts/new
