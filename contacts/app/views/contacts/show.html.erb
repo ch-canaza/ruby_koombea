@@ -1,12 +1,13 @@
-<p id="notice"><%= notice %></p>
-
 <div class="bg-light">
  
-  <!--%=link_to image_tag(@contact.image.variant( resize: '400x400' ).processed), @contact.image %-->
-  <!--%= link_to image_tag(@contact.image.variant(:profile )) %-->
-  <%= link_to image_tag(@contact.profile), @contact.image %>
+  <td>
+    <% if @contact.image.attached? %>
+      <%= link_to image_tag(@contact.profile), @contact.image %>
+    <% else %>
+      <p>[ no available image ] </p>
+    <% end %>
+  </td>
   
-
   <p class="fs-2">
     <strong>First name:</strong>
     <%= @contact.first_name %>
@@ -19,17 +20,8 @@
 
   <p class="fs-4">
     <strong>Media:</strong>
-   <!--- cada bloque hace los mismo --> 
-
-    <!--%= @links.map{|link| link.media} %-->
-   <!---------->
-    <!--% @links.each do |link| %-->
-      <!--p--><!--%= link.media %--><!--/p-->
-    <!--% end %-->
-   <!------------>   
-    <%= render partial: "links_show", collection: @links %>
-
-    
+  
+    <%= render partial: "links_show", collection: @link %>  
   </p>
 
   <p class="fs-6">
@@ -39,7 +31,8 @@
 
 </div>
 
-<% if logged_in? && (@contact.user == current_user || current_user_admin) %>
+<% if logged_in? && (@contact.user == current_user || current_user.admin) %>
   <%= link_to 'Edit', edit_contact_path(@contact), class:"btn btn-success" %>
 <% end %>
+
 <%= link_to 'Back', contacts_path, class:"btn btn-danger" %>

@@ -15,7 +15,6 @@
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
-  
 </p>
 
 <p>
@@ -23,11 +22,8 @@
   <%= @user.email %>
 </p>
 
-<p>
-  <!--strong>Password:</strong-->
-  <!--%= @user.password_digest %-->
-</p>
 <% if logged_in? && @user == current_user %>
   <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary" %> 
 <% end %>
+
 <%= link_to 'Back', users_path, class:"btn btn-danger" %>

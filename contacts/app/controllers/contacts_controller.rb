@@ -1,88 +1,79 @@
-class ContactsController < ApplicationController
-  before_action :set_contact, only: %i[ show edit update destroy ]
-  before_action :require_user, except: [:show, :index]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+# frozen_string_literal: true
 
-  # GET /contacts or /contacts.json
+# defines methods for CRUD
+class ContactsController < ApplicationController
+  before_action :set_contact, only: %i[show edit update destroy]
+  before_action :require_user, except: %i[show index]
+  before_action :require_same_user, only: %i[edit update destroy]
+
   def index
     @contacts = Contact.all
   end
 
-  
-
-  # GET /contacts/1 or /contacts/1.json
   def show
-    @links = @contact.links
-  
+    @link = @contact.links
   end
 
-  # GET /contacts/new
   def new
     @contact = Contact.new
     @contact.links.build
   end
 
-  # GET /contacts/1/edit
   def edit
     @contact.links.build
-
   end
 
-  # POST /contacts or /contacts.json
   def create
     @contact = Contact.new(contact_params)
     @contact.user = current_user
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: "Contact was successfully created." }
-        format.json { render :show, status: :created, location: @contact }
+        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /contacts/1 or /contacts/1.json
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: "Contact was successfully updated." }
-        format.json { render :show, status: :ok, location: @contact }
+        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /contacts/1 or /contacts/1.json
   def destroy
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: "Contact was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
+
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
+
+  def contact_params
+    params.require(:contact).permit(
+      :first_name,
+      :last_name,
+      :media,
+      :image,
+      links_attributes:
+      %i[id _destroy contacts_id first_name media]
+    )
+  end
+
+  # verify if an action is performed by the current user
+  def require_same_user
+    if current_user != @contact.user && !current_user.admin?
+      flash[:alert] = 'You can edit or delete your own article'
+      redirect_to @contact
     end
-
-    # Only allow a list of trusted parameters through.
-    def contact_params
-      #params.require(:contact).permit(:first_name, :last_name, :media, links_attributes: [:id, :_destroy, :contacts_id, :first_name, :last_name])
-      params.require(:contact).permit(:first_name, :last_name, :media, :image, links_attributes: Contact.attribute_names.map(&:to_sym).push(:_destroy))
-
-    end
-
-    def require_same_user # verifica que la accion solo la ejecuta el dueño
-      if current_user != @contact.user && !current_user.admin?
-        flash[:alert] = "You can edit or delete your own article"
-        redirect_to @contact
-      end
-    end
-
+  end
 end

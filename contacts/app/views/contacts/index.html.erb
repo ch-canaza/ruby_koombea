@@ -1,43 +1,58 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Contacts</h1>
 
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Avatar<th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th colspan="4">Actions</th>
+      <th>
+        Avatar
+      <th>
+      <th>
+        First name
+      </th>
+      <th>
+        Last name
+      </th>
+      <th colspan="4">
+        Actions
+      </th>
     </tr>
   </thead>
 
   <tbody>
     <% @contacts.each do |contact| %>
       <tr>
-        <td><% if contact.image.attached? %>
-          <%= image_tag contact.image, size: 100 %>
-          <!--%= image_tag(contact.thumb) %-->
-
+        <td>
+          <% if contact.image.attached? %>
+            <%= image_tag contact.image, size: 100 %>
           <% else %>
-            <p><%= image_tag("/unknown.png") %></p>
-        <% end %></td>
+            <p>
+              <%= image_tag("/unknown.png") %>
+            </p>
+          <% end %>
+        </td>
         
-        <td><%= contact.first_name %></td>
-        <td><%= contact.last_name %></td>
+        <td>
+          <%= contact.first_name %>
+        </td>
+        <td>
+          <%= contact.last_name %>
+        </td>
         
-        <td><%= link_to 'Show', contact %></td>
+        <td>
+          <%= link_to 'Show', contact %>
+        </td>
         <% if logged_in? && (contact.user == current_user || current_user.admin?) %>
-          <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-          <!--td><%= link_to 'link list', edit_contact_path(contact) %></td-->
-          <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td>
+            <%= link_to 'Edit', edit_contact_path(contact) %>
+          </td>
+          <td>
+            <%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-
 <br>
 
 <%= link_to 'New Contact', new_contact_path, class:"btn btn-success" %>

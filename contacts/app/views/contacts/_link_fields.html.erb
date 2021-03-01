@@ -1,15 +1,21 @@
-<div>
-  <tr>
-    
-      
-    <td><%= f.label :first_name, "my media name" %></td> 
-    <td><%= f.text_field :first_name %></td>
-    <td><%= f.label :media, "my media link" %></td> 
-    <td><%= f.text_field :media %></td>
-    <td>  <%= f.hidden_field :_destroy%></td>
-    <td><%= link_to "remove", "#", class: "remove-field" %></td>
-  </tr>
+<div class="nested-fields">
+  <div>
+    <%= f.label :first_name, "my media name" %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div>
+    <%= f.label :media, "my media link" %>
+    <%= f.text_field :media %>
+  </div>
+  <div>
+    <%= f.hidden_field :_destroy %>
+  </div>
   
+  <p class= "btn btn-dark">
+    <%= link_to "remove", "#", class: "remove_fields" %>
+  </p>
+
+
   <br/>
 
 </div>

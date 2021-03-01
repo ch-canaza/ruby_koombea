@@ -1,19 +1,16 @@
 <h1 class="text-center mt-4">log in </h1>
 <%= form_with(scope: :session, url: login_path) do |form| %>
 
-    
-
   <div class="field text-center mt-4">
     <%= form.label :email %>
     <%= form.email_field :email %>
   </div>
-
   <div class="field text-center mt-4">
     <%= form.label :password %>
     <%= form.password_field :password_digest %>
   </div>
-
   <div class="actions text-center mt-4">
     <%= form.submit "log in"%>
   </div>
+
 <% end %>
