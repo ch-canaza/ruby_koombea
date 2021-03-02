@@ -28,7 +28,8 @@
   
   <div class="form-group">
     <% if contact.image.attached? %>
-      -- [ mi imagen ] -- 
+      <!--%= image_tag(@contact.thumb) %-->
+       [ mi imagen ]  
     <% else %>
       <p>[ no available image ]</p>
       <br />
@@ -37,6 +38,11 @@
     <%= form.label :image %>
     <%= form.file_field :image, class: "form-control" %>
 
+  </div>
+  
+  <div class="field form-label">
+    <%= form.label :description %>
+    <%= form.text_area :description, class:"form-control form-control-lg" %>
   </div>
  
   <div class="field form-label">

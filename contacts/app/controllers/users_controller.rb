@@ -2,9 +2,9 @@
 
 # defines methods for user's CRUD
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :require_user, only: [:edit, :update, :destroy]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: %i[show edit update destroy]
+  before_action :require_user, only: %i[edit update destroy]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def index
     @users = User.all
@@ -54,12 +54,13 @@ class UsersController < ApplicationController
 
   private
 
+  # @user = User.find_by_name(params[:id]) which is better ??
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(name: params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :user_image, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :description, :user_name, :user_image, :password, :password_confirmation)
   end
 
   def require_same_user

@@ -30,6 +30,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :user_name %>
+    <%= form.text_field :user_name %>
+  </div>
+
+  <div class="field">
     <%= form.label :email %>
     <%= form.email_field :email %>
   </div>
@@ -40,10 +45,14 @@
   </div>
   
   <div class="field">
-    <%= form.label :retype_password %>
+    <%= form.label :confirm_password %>
     <%= form.password_field :password_confirmation %>
   </div>
 
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
   <div class="actions">
     <%= form.submit class:"btn btn-success" %>
   </div>

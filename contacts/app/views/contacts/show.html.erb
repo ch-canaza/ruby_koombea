@@ -4,31 +4,47 @@
     <% if @contact.image.attached? %>
       <%= link_to image_tag(@contact.profile), @contact.image %>
     <% else %>
-      <p>[ no available image ] </p>
+      <p> [ no available image ] </p>
     <% end %>
   </td>
   
+  <p class="fs-7">
+    <strong>
+      Role:
+    </strong>
+    <%= @contact.class %>
+  </p>
   <p class="fs-2">
     <strong>First name:</strong>
     <%= @contact.first_name %>
   </p>
-
   <p class="fs-2">
-    <strong>Last name:</strong>
+    <strong>
+      Last name:
+    </strong>
     <%= @contact.last_name %> 
   </p>
-
   <p class="fs-4">
-    <strong>Media:</strong>
-  
+    <strong>
+      Media:
+    </strong>
     <%= render partial: "links_show", collection: @link %>  
   </p>
-
   <p class="fs-6">
     contact listed by:
-    <%= @contact.user.name %>
+    <strong>
+      <%= link_to @contact.user.name, @contact.user %>
+    </strong>
   </p>
-
+  <div>
+    <p class="fs-6">
+      <strong>
+        Description:
+      </strong>
+    </p>
+    <%= @contact.description %>
+  </div>
+  <br />
 </div>
 
 <% if logged_in? && (@contact.user == current_user || current_user.admin) %>

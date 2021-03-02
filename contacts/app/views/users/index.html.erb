@@ -47,12 +47,12 @@
         <td>
           <%= user.password %>
         </td>
-        <td>
-          <%= link_to 'Show', user %>
-        </td>
-      
+       
         <% if logged_in? %>
           <% if user == current_user %>
+            <td>
+              <%= link_to 'Show', user %>
+            </td>
             <td>
               <%= link_to 'Edit', edit_user_path(user) %>
             </td>

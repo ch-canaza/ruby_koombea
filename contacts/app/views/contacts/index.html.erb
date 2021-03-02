@@ -37,11 +37,10 @@
         <td>
           <%= contact.last_name %>
         </td>
-        
-        <td>
-          <%= link_to 'Show', contact %>
-        </td>
         <% if logged_in? && (contact.user == current_user || current_user.admin?) %>
+          <td>
+            <%= link_to 'Show', contact %>
+          </td>
           <td>
             <%= link_to 'Edit', edit_contact_path(contact) %>
           </td>

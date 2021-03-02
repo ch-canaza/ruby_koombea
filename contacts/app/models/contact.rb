@@ -11,9 +11,13 @@ class Contact < ApplicationRecord
 
   validates :first_name, presence: true,
                         uniqueness: {case_sensitive: false },
-                        length: { maximum: 20 }
+                        length: { maximum: 25 }
+  validates :last_name, presence: true,
+                        uniqueness: { case_sensitive: false },
+                        length: { maximum: 25 }
+  validates :description, presence: true,
+                    length: { maximum: 200 }
 
-  validates :last_name, presence: true
   validate :validate_correct_image_type
 
   before_save { self.first_name = first_name.downcase }
@@ -25,6 +29,10 @@ class Contact < ApplicationRecord
 
   def profile
     image.variant(resize: '400x400!').processed
+  end
+
+  def to_param
+    first_name
   end
 
   private

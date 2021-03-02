@@ -12,15 +12,40 @@
   <p class="card-text"><%= link_to (pluralize(@user.contact.count, "contact")), contacts_path %><p>
   <%= render partial: "contacts_show", collection: @user_contacts %>
 </div>
-<p>
-  <strong>Name:</strong>
+<p class="fs-7">
+  <strong>
+    Role:
+  </strong>
+  <%= @user.class %>
+</p>
+<p class="fs-2">
+  <strong>
+    Name:
+  </strong>
   <%= @user.name %>
 </p>
 
-<p>
-  <strong>Email:</strong>
+<p class="fs-5">
+  <strong>
+    Email:
+  </strong>
   <%= @user.email %>
 </p>
+<p class="fs-5">
+  <strong>
+    Username:
+  </strong>
+  <%= @user.user_name %>
+</p>
+<div>
+  <p class="fs-6">
+    <strong>
+      Description:
+    </strong>
+  </p>
+  <%= @user.description %>
+</div>
+<br />
 
 <% if logged_in? && @user == current_user %>
   <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary" %> 

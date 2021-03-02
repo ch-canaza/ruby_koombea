@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users
-  resources :contacts
+  resources :contacts, param: 'first_name'
   get 'home/about'
   root 'home#index'
   get 'signup', to: 'users#new'

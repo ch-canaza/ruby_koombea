@@ -55,7 +55,7 @@ class ContactsController < ApplicationController
   private
 
   def set_contact
-    @contact = Contact.find(params[:id])
+    @contact = Contact.find_by(first_name: params[:first_name])
   end
 
   def contact_params
@@ -64,6 +64,7 @@ class ContactsController < ApplicationController
       :last_name,
       :media,
       :image,
+      :description,
       links_attributes:
       %i[id _destroy contacts_id first_name media]
     )
