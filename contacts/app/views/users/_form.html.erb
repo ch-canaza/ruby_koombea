@@ -20,37 +20,53 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_image %>
+    <strong>
+      <%= form.label :user_image %>
+    </strong>
     <%= form.file_field :user_image %>
   </div>
   
   <div class="field">
-    <%= form.label :name %>
+    <strong>
+      <%= form.label :name %>
+    </strong>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :user_name %>
+    <strong>
+      <%= form.label :user_name %>
+    </strong>
     <%= form.text_field :user_name %>
   </div>
 
   <div class="field">
-    <%= form.label :email %>
+    <strong>
+      <%= form.label :email %>
+    </strong>
     <%= form.email_field :email %>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-  
-  <div class="field">
-    <%= form.label :confirm_password %>
-    <%= form.password_field :password_confirmation %>
-  </div>
+  <% if !logged_in? %>
+    <div class="field">
+      <strong>
+        <%= form.label :password %>
+      </strong>
+      <%= form.password_field :password %>
+    </div>
+    
+    <div class="field">
+      <strong>
+        <%= form.label :confirm_password %>
+      </strong>
+      <%= form.password_field :password_confirmation %>
+    </div>
+  <% end %>
 
   <div class="field">
-    <%= form.label :description %>
+    <strong>
+      <%= form.label :description %>
+    </strong>
     <%= form.text_area :description %>
   </div>
   <div class="actions">

@@ -3,7 +3,7 @@
 # defines methods for CRUD
 class ContactsController < ApplicationController
   before_action :set_contact, only: %i[show edit update destroy]
-  before_action :require_user, except: %i[show index]
+  before_action :require_user, except: %i[index]
   before_action :require_same_user, only: %i[edit update destroy]
 
   def index
