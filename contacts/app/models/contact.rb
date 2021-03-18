@@ -3,7 +3,8 @@
 # contact model validations and permissions.
 class Contact < ApplicationRecord
   belongs_to :user
-
+  has_many :contact_categories
+  has_many :categories, through: :contact_categories
   has_many :links, dependent: :destroy
   has_one_attached :image
 

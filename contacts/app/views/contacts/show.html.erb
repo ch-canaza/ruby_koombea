@@ -7,7 +7,14 @@
       <p> [ no available image ] </p>
     <% end %>
   </td>
-  
+  <br>
+
+  <% if @contact.categories.any? %>
+    <div class="fs-2">
+      <%= render @contact.categories %>
+    </div>
+  <% end %>
+  <br>
   <p class="fs-7">
     <strong>
       Role:

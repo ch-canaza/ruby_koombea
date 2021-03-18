@@ -1,0 +1,25 @@
+<h1>Categories</h1>
+<div class="fs-2">
+  <%= will_paginate @categories %>
+</div>
+<br>
+<% @categories.each do |category| %>
+  <p class="fs-7">
+  <strong>
+      Role:
+  </strong>
+  <%= category.class %>
+  </p>
+  <p class="fs-2">
+  <strong>
+      Name:
+  </strong>
+  <%= category.name %>
+  </p>
+
+  <% if logged_in? && @user == current_user %>
+  <%= link_to 'Edit', new_category_path(@category), class:"btn btn-primary" %> 
+  <% end %>
+<% end %>
+
+<%= link_to 'Back', new_category_path, class:"btn btn-danger" %>

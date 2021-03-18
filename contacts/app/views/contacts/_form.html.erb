@@ -44,7 +44,14 @@
     <%= form.label :description %>
     <%= form.text_area :description, class:"form-control form-control-lg" %>
   </div>
- 
+
+  <div class="field form-label">
+    <%= form.label :category %>
+    <%= form.collection_select :category_ids, Category.all, :id, :name,
+    { prompt: 'make your selection from the list below (can be empty)'}, { multiple: true } %>
+
+  </div>
+
   <div class="field form-label">
     <h4> add media </h4>
     

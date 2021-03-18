@@ -65,6 +65,7 @@ class ContactsController < ApplicationController
       :media,
       :image,
       :description,
+      category_ids: [],
       links_attributes:
       %i[id _destroy contacts_id first_name media]
     )
